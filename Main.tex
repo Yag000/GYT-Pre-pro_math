@@ -1,6 +1,9 @@
 \documentclass{beamer}
 \usepackage[utf8]{inputenc}
 
+\usetheme{Copenhagen}
+
+
 \usepackage{hyperref}
 
 
@@ -17,20 +20,21 @@
 \usepackage{graphicx, enumitem}
 
 
-\usepackage[francais]{babel}
-
-
-
-
 \begin{document}
 	
 	
-		\title{AlphaGo (temp)}
-            \author{Thomas Arrous & Gabin Dudillieu & Yago Iglesias}	
-            \date{\today}
+	\author{Thomas Arrous\and Gabin Dudillieu\and Yago Iglesias}
+	\title{Apprentissage par renforcement}
+	\institute{Université Paris Cité}
+	\date{\today}
+	
+	
+	\begin{frame}[plain]
 		\maketitle
-
-		\tableofcontents
-
-
+	\end{frame}
+	
+	\input{MDP}
+	\input{MCTS}
+	\input{AlphaGo}
+	
 \end{document}
