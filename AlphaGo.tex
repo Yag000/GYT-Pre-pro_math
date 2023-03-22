@@ -35,7 +35,7 @@
 		\end{column}
 		\begin{column}{.3\textwidth}
 			\begin{block}{Value Network}
-				Réseau neuronal chargé de estimer la valuer d'une position, c'est-à-dire, les possibilité de gagner.
+				Réseau neuronal chargé de estimer la valuer d'une position, c'est-à-dire, les possibilités de gagner à partir de cette position.
 			\end{block}
 		\end{column}
 	\end{columns}
@@ -47,7 +47,7 @@
 		\begin{columns}[t]
 			\begin{column}{.4\textwidth}
 				\begin{block}{Avec un modèle}
-					Entrainement d'un réseaux supervisé (SL) avec 30 millions de positions.
+					Entrainement d'un réseaux supervisé (SL).
 				\end{block}
 			\end{column}
 			\begin{column}{.4\textwidth}
@@ -65,8 +65,11 @@
 \begin{frame}{AlphaGo}{Apprentissage avec un modèle (SL)}
 
 	\begin{itemize}
-		\item Entraînement initial supervisé à partir de parties jouées par des professionnels (30 million de positions différentes)
-		\item Le modèle doit prédire, à partir d'un état, le coup qu'un humain aurait fait
+		\item Entraînement initial supervisé à partir de parties jouées par des professionnels (30 million de positions différentes).
+		\item Le modèle doit prédire, à partir d'un état, le coup qu'un humain aurait fait.
+		\item Réseau neuronal de type convolutionnel avec 13 couches.
+		\item L’entraînement donne une politique $p_\sigma$, avec $\sigma$ les paramètres (les poids) du réseau.
+		\item Le temps d'évaluation d'une position est de l'ordre de 3ms avec une une précision de 57.0\% sur l'ensemble d’entraînement.
 	\end{itemize}
 
 \end{frame}
@@ -75,19 +78,28 @@
 \begin{frame}{AlphaGo}{Self-play}
 
 	\begin{itemize}
-		\item Parties entre la version actuelle de l'agent et une version antérieure aléatoire
-		\item Système de recompense simple : +1 si victoire et -1 si défaite
+		\item Structure égale à celle du SL, avec une politique $p_\rho$, avec des poids initiales égales à $\sigma$.
+		\item Parties entre la version actuelle de l'agent et une version antérieure aléatoire.
+		\item Système de recompense simple : +1 si victoire et -1 si défaite.
+		\item Taux de réussite contre le SL : 80\%.
 	\end{itemize}
 
 \end{frame}
 
 
-\begin{frame}{AlphaGo}{Velue network}
+\begin{frame}{AlphaGo}{Value network}
 	\begin{itemize}
 		\item Réseau neuronal qui permet d'évaluer la \textit{qualité} d'une position.
 		\item Il est entraîné à partir de la policy network.
-		\item
 	\end{itemize}
+\end{frame}
+
+\begin{frame}{AlphaGo}{Fast rollout policy}
+	\begin{itemize}
+		\item Politique de simulation rapide utilisé dans le MCTS.
+		\item Entrainé avec le même modèle que le SL, mais avec une politique $p_\pi$ et une architecture beaucoup plus simple.
+	\end{itemize}
+
 \end{frame}
 
 
