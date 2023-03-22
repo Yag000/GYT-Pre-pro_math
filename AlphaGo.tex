@@ -69,7 +69,7 @@
 		\item Le modèle doit prédire, à partir d'un état, le coup qu'un humain aurait fait.
 		\item Réseau neuronal de type convolutionnel avec 13 couches.
 		\item L’entraînement donne une politique $p_\sigma$, avec $\sigma$ les paramètres (les poids) du réseau.
-		\item Le temps d'évaluation d'une position est de l'ordre de 3ms avec une une précision de 57.0\% sur l'ensemble d’entraînement.
+		\item Le temps d'évaluation d'une position est de l'ordre de 3 ms avec une une précision de 57.0\% sur l'ensemble d’entraînement.
 	\end{itemize}
 
 \end{frame}
@@ -88,21 +88,33 @@
 
 
 \begin{frame}{AlphaGo}{Value network}
+	La \textbf{value network} nous permet d'estimer la valeur d'une position, c'est-à-dire, les possibilités de gagner à partir de cette position.
+	\begin{block}{Modèle théorique}
+		On définit $v^p$ comme la fonction qui prédit le résultat de la partie en partant de la position $s$ suivant la politique $p$. On a donc: $$v^p(s) = \mathbb{E}[z_t|s_t=s, a_{t,\dots,T}\sim p]$$
+		L'idéal est de trouver $v^*$, la fonction de valeur optimal avec un jeu parfait, mais c'est impossible.
+		On décide d'utiliser la meilleur politique qu'on connaît: $p_\rho$, ainsi on peut approximer la valeur de $v^*$. $$v_\theta(s) \approx v^{p_\rho}(s) \approx v^*(s)$$.
+	\end{block}
+\end{frame}
+
+\begin{frame}{AlphaGo}{Value network}
 	\begin{itemize}
-		\item Réseau neuronal qui permet d'évaluer la \textit{qualité} d'une position.
-		\item Il est entraîné à partir de la policy network.
+		\item Pour obtenir $v_\theta(s)$, on utilise un réseau de neurones profond.
+		\item Sa structure est la même que celle du RL mais avec une seule sortie et il est entraîné sur la RL.
 	\end{itemize}
+	\begin{center}
+		\includegraphics[width=5cm]{ressources/RL_and_VN}
+	\end{center}
 \end{frame}
 
 \begin{frame}{AlphaGo}{Fast rollout policy}
 	\begin{itemize}
 		\item Politique de simulation rapide utilisé dans le MCTS.
-		\item Entrainé avec le même modèle que le SL, mais avec une politique $p_\pi$ et une architecture beaucoup plus simple.
+		\item Entraîné avec le même modèle que le SL, mais avec une politique $p_\pi$ et une architecture beaucoup plus simple.
+		\item Elle obtient des résultats moins précis mais avec une vitesse de calcul bien supérieure: précision de 24.2\% et temps d'évaluation de 2 $\mu s$ .
 	\end{itemize}
-
 \end{frame}
 
 
-\begin{frame}{MCTS}
+\begin{frame}{AlphaGo}{MCTS}
 
 \end{frame}
