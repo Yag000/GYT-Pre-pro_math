@@ -121,7 +121,7 @@
 				\begin{itemize}
 					\item Dépendant des règles du jeu, crée un noeud à partir du noeud sélectionné si celui-ci n'est pas final.
 					\item On ne peut pas garder tout les résultats en mémoire.
-					\item Il existe plusieurs stratégies pour garder en mémoire des noeuds comme par exemple garder seulement un noeud par jeu simulé. Ce noeud correspond à la première position qui n'étaient pas déjà stockées lors du parcours.
+					\item Il existe plusieurs stratégies pour garder en mémoire les noeuds comme par exemple garder seulement un noeud par jeu simulé. Ce noeud correspond à la première position qui n'étaient pas déjà stockées lors du parcours.
 				\end{itemize}
 			\end{column}
 			\begin{column}{4cm}
@@ -149,9 +149,11 @@
 \end{frame}
 
 \begin{frame}{Monte Carlo Tree Search(MCTS)}{Stratégie Simulation}
-	\begin{block}{Exemple d'une stratégie : Urgency-Based Simulation}
+	\begin{block}{Exemple d'une stratégie : Sequence-like Simulation}
 		\begin{itemize}
-			\item Test
+			\item Cette stratégie est adapté au jeu de GO.
+			\item Dans cette statégie, on sélectionne chaque coup à proximité du dernier coup joué, afin de créer une séquence de coups adjacent. On sélectionne le coup à jouer dans la séquence du dernier coup en cherchant des motifs de jeu de taille 3x3 à une distance 1 par rapport au dernier coup. Ces motifs doivent être réalisés avec des connaissances du jeu. Si plusieurs motifs correspondent, on choisis aléatoirement le motif en jouant au milieu de celui-ci. Si aucun est reconnu, on choisit aléatoirement le coup.
+			\item (Distance de Manhattan : $d(A,B) = |X_{B} - X_{A}| + |Y_{B} - Y_{A}|$ dit aussi la distance entre deux points parcourue par un taxi lorsqu'il se déplace dans une ville où les rues sont agencées selon un réseau ou quadrillage.)
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -159,14 +161,52 @@
 \begin{frame}{Monte Carlo Tree Search(MCTS)}{Rétropropagation}
 	\begin{block}{Fonctionnement}
 		\begin{columns}
-			\begin{column}{6cm}
+			\begin{column}{8cm}
 				\begin{itemize}
-					\item TODO
+					\item La rétropropagation utilise le résultat de la simulation pour propager l'information aux parents de ce noeud récursivement jusqu'au plus haut afin de les mettre à jour, changeant alors la valeur des noeud. 
+					\item Le résultat pour un jeu à deux joueurs comme le GO peut être interprété de la façon suivante avec $R_{i}$ ce résultat : Si le joueur que joue l'IA gagne, $R_{i} = +1$, si il perd, $R_{i} = -1$ et $0$ sinon.
+					\item Il existe aussi plusieurs stratégie de rétropropagation.
 				\end{itemize}
 			\end{column}
-			\begin{column}{3cm}
+			\begin{column}{4cm}
 				\includegraphics[width=3cm]{ressources/Backpropagation.png}
 			\end{column}
 		\end{columns}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Monte Carlo Tree Search(MCTS)}{Stratégie Rétropropagation}
+	\begin{block}{Exemple de stratégies}
+		\begin{itemize}
+			\item \textbf{Moyenne} : Prend la moyenne des résultats : $v_{i} = \frac{\sum_{i}^{}R_{i}}{n_{i}}$ avec $v_{i}$ la valeur du noeud et $n_i$ le nombre de fois qu'il a été visité.
+			\item \textbf{Max} : Prend le max des résultats des enfants (pas efficace)
+			\item \textbf{Moyenne informée} : Attribue de plus grande valeur aux meilleurs résultats afin d'avoir le meilleurs résultats plus rapidement.
+			On a : $v_{i} = \frac{\sum_{j}^{}(v_{j}\times n_{j}\times U_{j})}{\sum_{j}^{}(n_{j}\times U_{j})}$ avec $U_{j}$ la fonction d'urgence utilisé pour la stratégie de séléction OMC.
+			\item Mais la majorité des programmes utilise la stratégie \textbf{Average} car elle donne de meilleurs résultats.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Monte Carlo Tree Search(MCTS)}{Choix du mouvement final}
+	\begin{block}{Exemple de choix du mouvement}
+		\begin{itemize}
+			\item \textbf{Maximum des noeuds}: On prend le noeud qui a la plus grande valeur.
+			\item \textbf{Noeud le plus robuste}: On prend le noeud qui a été visité le plus de fois.
+			\item \textbf{Mix}: On prend le noeud qui est à la fois le maximum et le plus robuste (on fait des simulations jusqu'à en obtenir un si non existant)
+			\item \textbf{Noeud le plus sécurisé}: On prend le noeud qui maximise une borne de confiance (a besoin d'expérimentation).
+			\item Il n'y pas beaucoup de différence parmi ces choix, sauf lorsque le temps pour faire le choix est faible, où le choix max devient moins efficace.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Monte Carlo Tree Search(MCTS)}{Application}
+	\begin{block}{Exemple d'applications}
+		\begin{itemize}
+			\item Pour les jeux à deux joueurs comme pour le GO, le MCTS a été une révolution :
+			\item Le programme MCTS Mogo Titan a permis pour la première fois de battre un joeurs pro de Go avec contrainte (7 pierres d'handicap).
+			\item Utilisés par les programmes MOGO, CRAZY STONE, FUEGO, ... qui sont aussi très efficace.
+			\item AlphaGo utilise aussi le MCTS pour sa recherche de coup (en l'adaptant à son programme).
+			
+		\end{itemize}
 	\end{block}
 \end{frame}
