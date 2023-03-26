@@ -2,8 +2,7 @@
 	\begin{block}{}
 		\begin{itemize}
 			\item Le MCTS est un algorithme de recherche arborescente utilisé pour résoudre des problèmes afin de prendre une décision (un déplacement dans un jeu par exemple).
-			\item Il n'utilise pas de fonction d'évaluation heuristique comparé à $\alpha$$\beta$ par exemple.
-			\item Il utilise les méthodes de Monte Carlo pour améliorer son efficacité.
+			\item Il n'utilise pas de fonction d'évaluation heuristique comparé à $\alpha$$\beta$ par exemple, et parcours les possibilités aléatoirement, en utilisant les donnés obtenus précédemment			\item Il utilise les méthodes de Monte Carlo pour améliorer son efficacité.
 			\item Il possède des variantes, dépendant de leur utilisation, comme Coulom ou Kocsis and Szepesvari par exemple.
 			\item Applicable si toutes les règles de l'application sont connus et si la longueur d'une partie et les gains ont une limite.	
 		\end{itemize}
@@ -17,8 +16,8 @@
 			\item Un noeud représente un état du jeu.
 			\item Chaque noeuds possèdent deux informations :
 			\item\begin{itemize}
-				\item - La valeur de sa position (dans un jeu, représenté souvent par la moyenne des résultats pour un jeu sur les noeuds visités)
-				\item - Le nombre de visite de ce noeud dans la simulation
+				\item - La valeur de sa position (dans un jeu, représenté souvent par la moyenne des résultats pour un jeu sur les noeuds visités).
+				\item - Le nombre de visite de ce noeud dans la simulation.
 			\end{itemize}
 			\item Chaque feuille de cet arbre représente soit un noeud dont les enfants n'ont pas encore été explorés, soit un état final de celui-ci.		
 		\end{itemize}
@@ -40,14 +39,134 @@
 	\end{block}
 \end{frame}
 
-\begin{frame}{Sélection}
+\begin{frame}{Monte Carlo Tree Search(MCTS)}{Sélection}
+\begin{block}{Fonctionnement}
+	\begin{columns}
+		\begin{column}{6cm}
+			\begin{itemize}
+				\item En commençant à partir de la racine, on applique récursivement une stratégie de sélection pour trouver une feuille de l'arbre à étendre (un chemin qui n'a donc pas encore été exploré).
+				\item La stratégie doit pour optimiser les résultats, faire un consensus entre exploitation et exploration.
+				\item Il existe pour cela plusieurs stratégies comme OMC, UCT, PBBM, ...
+			\end{itemize}
+		\end{column}
+		\begin{column}{3cm}
+			\includegraphics[width=3cm]{ressources/Selection.png}
+		\end{column}
+	\end{columns}
+\end{block}
 \end{frame}
 
-\begin{frame}{Expansion}
+\begin{frame}{Monte Carlo Tree Search(MCTS)}{Stratégie Sélection}
+	\begin{block}{Stratégie OMC (Objective Monte-Carlo)}
+		\begin{itemize}
+			\item $U_{i}$ une fonction d'urgence d'un mouvement avec :
+			\item $U_{i} = erfc(\frac{v_{0} - v_{i}}{\sqrt{2}\sigma_{i}})$
+			\item $v_{0}$ la valeur du meilleur mouvement et $v_{j}$ la valeur du mouvement courant.
+			\item $\sigma_{j}$ la déviation de $v_{j}$
+			\item erfc la fonction complémentaire d'erreur avec :
+			\item $erfc(x) = 1 - \frac{2}{\sqrt{\pi}}\int_{x}^{\infty}e^{-u^{2}}$
+			\item La probabilité $P_{m}$ pour chaque $m \in M$ avec :
+			\item $P_{m} = \frac{U(m)}{\sum_{j \in S_{i}}^{}U(j)}$
+			\item On choisit le prochain mouvement à simuler aléatoirement selon la probabilité $P_{m}$ et peut être longue à calculer.
+		\end{itemize}
+	\end{block}
 \end{frame}
 
-\begin{frame}{Simulation}
+\begin{frame}{Monte Carlo Tree Search(MCTS)}{Stratégie Sélection}
+	\begin{block}{PBBM (Probability to be Better than Best Move)}
+		\begin{itemize}
+			\item Similitude avec la stratégie OMC
+			\item $U_{i}$ aussi une fonction d'urgence d'un mouvement avec :
+			\item $U_{i} = \exp(-2.4\frac{v_{0} - v_{i}}{\sqrt{2(\sigma_{0}^2 + \sigma_{i}^2)}})) + \epsilon_{i}$
+			\item $v_{0}$ la valeur du meilleur mouvement et $v_{i}$ la valeur du mouvement courant.
+			\item $\sigma_{0}$ et $\sigma_{i}$ leur déviations
+			\item $\epsilon_ {i}$ une constante assurant que la fonction d'urgence ne soit pas égale à 0 avec :
+			\item $\epsilon_ {i} = \frac{0.1 + 2^{-i} + a_{i}}{N}$
+			\item $a_{i} = 1$ si le mouvement est un atari et $0$ sinon 
+		\end{itemize}
+	\end{block}
 \end{frame}
 
-\begin{frame}{Rétropropagation}
+\begin{frame}{Monte Carlo Tree Search(MCTS)}{Stratégie Sélection}
+	\begin{block}{Stratégie UCT (Upper Confidence bounds applied to Trees)}
+		\begin{itemize}
+			\item La stratégie UCT sélectionne un noeud $k$ fils du noeud $p$ qui satisfait la formule suivante :
+			\item $k \in argmax_{i\in I}(v_{i} + C \times \sqrt{\frac{\ln n_{p}}{n_{i}}})$
+			\item $I$ un set de noeuds atteignable par le noeud $p$.
+			\item $v_{i}$ la valeur du noeud i
+			\item $n_{p}$ et $n_{p}$ le nombre de fois que les noeuds $p$ et $i$ on été visités.
+			\item $C$ une constante.
+			\item Facile à implémenter et beaucoup utilisée.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Monte Carlo Tree Search(MCTS)}{Stratégie Sélection}
+	\begin{block}{Stratégie UCB1-TUNED}
+		\begin{itemize}
+			\item Variante de la stratégie UCT
+			\item Cette sélectionne un noeud $k$ fils du noeud $p$ qui satisfait la formule suivante :
+			\item $k \in argmax_{i\in I}(v_{i} + C \times \sqrt{\frac{\ln n_{p}}{n_{i}}\times \min(\frac{1}{4}, V_{i}(n_{i}))})$
+			\item avec $V_{i}$ une estimation de la borne supérieur de la variance de $v_{i}$ avec comme formule :
+			\item $V_{i}(n_{i}) = (\frac{1}{n_{i}}\sum_{t=1}^{n_{i}}R_{i,t,j}^2 - v_{i}^2 + \sqrt{\frac{2\ln n_{p}}{n_{i}}})$
+			\item $R_{i,t,k}$ la t-ième récompense obtenu au noeud $i$ pour le joueur $j$
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Monte Carlo Tree Search(MCTS)}{Expansion}
+	\begin{block}{Fonctionnement}
+		\begin{columns}
+			\begin{column}{8cm}
+				\begin{itemize}
+					\item Dépendant des règles du jeu, crée un noeud à partir du noeud sélectionné si celui-ci n'est pas final.
+					\item On ne peut pas garder tout les résultats en mémoire.
+					\item Il existe plusieurs stratégies pour garder en mémoire des noeuds comme par exemple garder seulement un noeud par jeu simulé. Ce noeud correspond à la première position qui n'étaient pas déjà stockées lors du parcours.
+				\end{itemize}
+			\end{column}
+			\begin{column}{4cm}
+				\includegraphics[width=3cm]{ressources/Expansion.png}
+			\end{column}
+		\end{columns}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Monte Carlo Tree Search(MCTS)}{Simulation}
+	\begin{block}{Fonctionnement}
+		\begin{columns}
+			\begin{column}{7cm}
+				\begin{itemize}
+					\item Cette étape réalise une simulation d'une partie aléatoirement (ou partiellement) à partir du noeud qui à été étendu jusqu'à atteindre un état final, afin d'obtenir un résultat.
+					\item Il existe des stratégies de simulation, mais qui sont difficile à définir car on doit garder un bon compromis entre recherche et exploitation.
+					\item Ces stratégies peuvent utilises des connaissances du jeu (patterns, considérations, ...)
+				\end{itemize}
+			\end{column}
+			\begin{column}{4cm}
+				\includegraphics[width=3cm]{ressources/Simulation.png}
+			\end{column}
+		\end{columns}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Monte Carlo Tree Search(MCTS)}{Stratégie Simulation}
+	\begin{block}{Exemple d'une stratégie : Urgency-Based Simulation}
+		\begin{itemize}
+			\item Test
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Monte Carlo Tree Search(MCTS)}{Rétropropagation}
+	\begin{block}{Fonctionnement}
+		\begin{columns}
+			\begin{column}{6cm}
+				\begin{itemize}
+					\item TODO
+				\end{itemize}
+			\end{column}
+			\begin{column}{3cm}
+				\includegraphics[width=3cm]{ressources/Backpropagation.png}
+			\end{column}
+		\end{columns}
+	\end{block}
 \end{frame}
