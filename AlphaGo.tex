@@ -39,7 +39,7 @@
             \end{block}
         \end{column}
         \begin{column}{.3\textwidth}
-            \begin{block}{Rollout policy}
+            \begin{block}{Fast Rollout policy}
                 Politique plus simple que les autres qui permet une simulation rapide du reste de la partie.
             \end{block}
         \end{column}
@@ -130,8 +130,14 @@
 \end{frame}
 
 \begin{frame}{AlphaGo}{Fast rollout policy}
+    \begin{block}{Objectif}
+        \begin{center}
+            Trouver une politique rapide qui permet de simuler le reste de la partie.
+        \end{center}
+    \end{block}
+    \pause
     \begin{itemize}
-        \item Politique de simulation rapide utilisé dans le MCTS.
+        \item
         \item Entraîné avec le même modèle que le SL, mais avec une politique $p_\pi$ et une architecture beaucoup plus simple.
         \item Elle obtient des résultats moins précis mais avec une vitesse de calcul bien supérieure: précision de 24.2\% et temps d'évaluation de 2 $\mu s$ .
     \end{itemize}
