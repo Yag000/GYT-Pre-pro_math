@@ -3,7 +3,7 @@
 		\begin{itemize}
 			\item Le MCTS est un algorithme de recherche arborescente utilisé pour résoudre des problèmes afin de prendre une décision (un déplacement dans un jeu par exemple).
 			\item Il n'utilise pas de fonction d'évaluation heuristique comparé à $\alpha$$\beta$ par exemple, et parcours les possibilités aléatoirement, en utilisant les donnés obtenus précédemment			\item Il utilise les méthodes de Monte Carlo pour améliorer son efficacité.
-			\item Il possède des variantes, dépendant de leur utilisation, comme Coulom ou Kocsis and Szepesvari par exemple.
+			\item Il possède des variantes, dépendant de leur utilisation, comme celles de Coulom ou Kocsis and Szepesvari.
 			\item Applicable si toutes les règles de l'application sont connus et si la longueur d'une partie et les gains ont une limite.	
 		\end{itemize}
 	\end{block}
@@ -14,7 +14,7 @@
 		\begin{itemize}
 			\item L'arbre de recherche est une modélisation des possibilités de jeu pour la simulation.
 			\item Un noeud représente un état du jeu.
-			\item Chaque noeuds possèdent deux informations :
+			\item Chaque noeud possède deux informations :
 			\item\begin{itemize}
 				\item - La valeur de sa position (dans un jeu, représenté souvent par la moyenne des résultats pour un jeu sur les noeuds visités).
 				\item - Le nombre de visite de ce noeud dans la simulation.
@@ -42,14 +42,14 @@
 \begin{frame}{Monte Carlo Tree Search(MCTS)}{Sélection}
 \begin{block}{Fonctionnement}
 	\begin{columns}
-		\begin{column}{6cm}
+		\begin{column}{7cm}
 			\begin{itemize}
 				\item En commençant à partir de la racine, on applique récursivement une stratégie de sélection pour trouver une feuille de l'arbre à étendre (un chemin qui n'a donc pas encore été exploré).
 				\item La stratégie doit pour optimiser les résultats, faire un consensus entre exploitation et exploration.
 				\item Il existe pour cela plusieurs stratégies comme OMC, UCT, PBBM, ...
 			\end{itemize}
 		\end{column}
-		\begin{column}{3cm}
+		\begin{column}{4cm}
 			\includegraphics[width=3cm]{ressources/Selection.png}
 		\end{column}
 	\end{columns}
@@ -63,7 +63,7 @@
 			\item $U_{i} = erfc(\frac{v_{0} - v_{i}}{\sqrt{2}\sigma_{i}})$
 			\item $v_{0}$ la valeur du meilleur mouvement et $v_{j}$ la valeur du mouvement courant.
 			\item $\sigma_{j}$ la déviation de $v_{j}$
-			\item erfc la fonction complémentaire d'erreur avec :
+			\item $erfc$ la fonction complémentaire d'erreur avec :
 			\item $erfc(x) = 1 - \frac{2}{\sqrt{\pi}}\int_{x}^{\infty}e^{-u^{2}}$
 			\item La probabilité $P_{m}$ pour chaque $m \in M$ avec :
 			\item $P_{m} = \frac{U(m)}{\sum_{j \in S_{i}}^{}U(j)}$
@@ -152,8 +152,8 @@
 	\begin{block}{Exemple d'une stratégie : Sequence-like Simulation}
 		\begin{itemize}
 			\item Cette stratégie est adapté au jeu de GO.
-			\item Dans cette statégie, on sélectionne chaque coup à proximité du dernier coup joué, afin de créer une séquence de coups adjacent. On sélectionne le coup à jouer dans la séquence du dernier coup en cherchant des motifs de jeu de taille 3x3 à une distance 1 par rapport au dernier coup. Ces motifs doivent être réalisés avec des connaissances du jeu. Si plusieurs motifs correspondent, on choisis aléatoirement le motif en jouant au milieu de celui-ci. Si aucun est reconnu, on choisit aléatoirement le coup.
-			\item (Distance de Manhattan : $d(A,B) = |X_{B} - X_{A}| + |Y_{B} - Y_{A}|$ dit aussi la distance entre deux points parcourue par un taxi lorsqu'il se déplace dans une ville où les rues sont agencées selon un réseau ou quadrillage.)
+			\item Dans cette statégie, on sélectionne chaque coup à proximité du dernier coup joué, afin de créer une séquence de coups adjacents. On sélectionne le coup à jouer dans la séquence du dernier coup, en cherchant des motifs de jeu de taille 3x3 à une distance 1 par rapport à celui-ci. Ces motifs doivent être réalisés avec des connaissances du jeu. Si plusieurs motifs correspondent, on choisis aléatoirement le motif en jouant au milieu de celui-ci. Si aucun est reconnu, on choisit aléatoirement le coup.
+			\item (Distance de Manhattan : $d(A,B) = |X_{B} - X_{A}| + |Y_{B} - Y_{A}|$)
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -181,8 +181,8 @@
 			\item \textbf{Moyenne} : Prend la moyenne des résultats : $v_{i} = \frac{\sum_{i}^{}R_{i}}{n_{i}}$ avec $v_{i}$ la valeur du noeud et $n_i$ le nombre de fois qu'il a été visité.
 			\item \textbf{Max} : Prend le max des résultats des enfants (pas efficace)
 			\item \textbf{Moyenne informée} : Attribue de plus grande valeur aux meilleurs résultats afin d'avoir le meilleurs résultats plus rapidement.
-			On a : $v_{i} = \frac{\sum_{j}^{}(v_{j}\times n_{j}\times U_{j})}{\sum_{j}^{}(n_{j}\times U_{j})}$ avec $U_{j}$ la fonction d'urgence utilisé pour la stratégie de séléction OMC.
-			\item Mais la majorité des programmes utilise la stratégie \textbf{Average} car elle donne de meilleurs résultats.
+			On a : $v_{i} = \frac{\sum_{j}^{}(v_{j}\times n_{j}\times U_{j})}{\sum_{j}^{}(n_{j}\times U_{j})}$ avec $U_{j}$ la fonction d'urgence utilisé pour la stratégie de sélection OMC.
+			\item Mais la majorité des programmes utilise la stratégie \textbf{Moyenne} car elle donne de meilleurs résultats.
 		\end{itemize}
 	\end{block}
 \end{frame}
