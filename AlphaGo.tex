@@ -136,22 +136,49 @@
         \end{center}
     \end{block}
     \pause
-    \begin{itemize}
-        \item
-        \item Entraîné avec le même modèle que le SL, mais avec une politique $p_\pi$ et une architecture beaucoup plus simple.
-        \item Elle obtient des résultats moins précis mais avec une vitesse de calcul bien supérieure: précision de 24.2\% et temps d'évaluation de 2 $\mu s$ .
-    \end{itemize}
+    \begin{block}{Solution}
+        \begin{itemize}
+            \item
+            \item Entraîné avec le même modèle que le SL, mais avec une politique $p_\pi$ et une architecture beaucoup plus simple.
+            \item Elle obtient des résultats moins précis mais avec une vitesse de calcul bien supérieure: précision de 24.2\% et temps d'évaluation de 2 $\mu s$ .
+        \end{itemize}
+    \end{block}
 \end{frame}
 
 
 \begin{frame}{AlphaGo}{MCTS}
     \begin{center}
         \includegraphics[width=10.5cm]{ressources/AlphaGo/MCTS_AlphaGo}
-        \begin{itemize}
-            \item $u(s,a) \propto \frac{P(s,a)}{1+N(s,a)}$
-            \item $N (s,a) = \sum\limits_{i=1}^{n} 1_{s,a,i} $
-            \item $V(s_L)=(1-\lambda)v_\theta(s_L) + \lambda z_L$
-            \item $Q(s,a) = \frac{1}{N(s,a)}\sum\limits_{i=1}^{n} 1_{s,a,i} V(s_L)$
-        \end{itemize}
+        \begin{block}{}
+            \begin{columns}[t]
+                \begin{column}{0.5\textwidth}
+                    $u(s,a) \propto \frac{P(s,a)}{1+N(s,a)}$
+                    $Q(s,a) = \frac{1}{N(s,a)}\sum\limits_{i=1}^{n} 1_{s,a,i} V(s_L)$
+                \end{column}
+                \begin{column}{0.4\textwidth}
+                    $N (s,a) = \sum\limits_{i=1}^{n} 1_{s,a,i} $
+                    $V(s_L)=(1-\lambda)v_\theta(s_L) + \lambda z_L$
+                \end{column}
+            \end{columns}
+        \end{block}
     \end{center}
+\end{frame}
+
+\begin{frame}{AlphaGo}{Résultats}
+    \begin{columns}[t]
+        \begin{column}{.4\textwidth}
+            \vspace{-1.5cm}
+            \begin{figure}
+                \includegraphics[scale=0.3]{ressources/AlphaGo/AlphaGovsShit.png}
+                Elo de AlphaGo comparé à d'autres IA
+            \end{figure}
+        \end{column}
+        \begin{column}{.4\textwidth}
+            \begin{figure}
+                \includegraphics[scale=0.3]{ressources/AlphaGo/comparaison_different_models}
+                \\
+                Elo de AlphaGo selon les composants utilisés
+            \end{figure}
+        \end{column}
+    \end{columns}
 \end{frame}
