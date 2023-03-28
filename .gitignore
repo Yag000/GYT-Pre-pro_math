@@ -301,9 +301,9 @@ TSWLatexianTemp*
 #*Notes.bib
 
 
-#IDE
+# IDE
 .vscode
 
-#Main pdf
+# Main.pdf
 Main.pdf
 
