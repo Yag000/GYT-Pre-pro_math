@@ -83,7 +83,7 @@
 \begin{frame}{AlphaGo}{Apprentissage avec un modèle (SL)}
     \begin{block}{Resultat}
         Politique $p_\sigma$, avec $\sigma$ les paramètres (les poids) du réseau.
-        Le temps d'évaluation d'une position est de l'ordre de 3 ms avec une une précision de 57.0\%.
+        Le temps d'évaluation d'une position est de l'ordre de 3 ms avec une précision de 57.0\%.
     \end{block}
     \begin{center}
         \includegraphics[scale=0.4]{ressources/AlphaGo/Policy_Network}
@@ -101,7 +101,7 @@
         \begin{itemize}
             \item Entraînement par renforcement en jouant des parties contre soi-même.
             \item Système de recompense simple : +1 si victoire et -1 si défaite.
-            \item Structure égale à celle du SL, avec une politique $p_\rho$, avec des poids initiales égales à $\sigma$.
+            \item Structure égale à celle du SL, avec une politique $p_\rho$, avec des poids initiales égaux à $\sigma$.
             \item Parties entre la version actuelle de l'agent et une version antérieure aléatoire.
             \item Taux de réussite contre le SL : 80\%.
         \end{itemize}
@@ -113,7 +113,7 @@
     La \textbf{value network} nous permet d'estimer la valeur d'une position, c'est-à-dire, les possibilités de gagner à partir de cette position.
     \begin{block}{Modèle théorique}
         On définit $v^p$ comme la fonction qui prédit le résultat de la partie en partant de la position $s$ suivant la politique $p$. On a donc: $$v^p(s) = \mathbb{E}[z_t|s_t=s, a_{t,\dots,T}\sim p]$$
-        L'idéal est de trouver $v^*$, la fonction de valeur optimal avec un jeu parfait, mais c'est impossible.
+        L'idéal est de trouver $v^*$, la fonction de valeur optimale avec un jeu parfait, mais c'est impossible.
         On décide d'utiliser la meilleur politique qu'on connaît: $p_\rho$, ainsi on peut approximer la valeur de $v^*$. $$v_\theta(s) \approx v^{p_\rho}(s) \approx v^*(s)$$
     \end{block}
 \end{frame}
