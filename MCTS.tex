@@ -234,7 +234,7 @@
 			\item \textbf{Noeud le plus robuste}: On prend le noeud qui a été visité le plus de fois.
 			\item \textbf{Mix}: On prend le noeud qui est à la fois le maximum et le plus robuste (on fait des simulations jusqu'à en obtenir un si non existant)
 			\item \textbf{Noeud le plus sécurisé}: On prend le noeud qui maximise une borne de confiance (a besoin d'expérimentation).
-			\item Il n'y pas beaucoup de différence parmi ces choix, sauf lorsque le temps pour faire le choix est faible, où le choix max devient moins efficace.
+			\item Il n'y pas beaucoup de différence parmi ces choix, sauf lorsque le temps pour faire le choix est faible, où le choix du \textbf{Maximum des noeuds} devient moins efficace.
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -243,7 +243,7 @@
 	\begin{block}{Exemple d'applications}
 		\begin{itemize}
 			\item Pour les jeux à deux joueurs comme pour le GO, le \textbf{MCTS} a été une révolution :
-			\item Le programme MCTS \textbf{Mogo Titan} a permis pour la première fois de battre un joeurs pro de Go avec contrainte (7 pierres d'handicap).
+			\item Le programme MCTS \textbf{Mogo Titan} a permis pour la première fois de battre un joueur professionnel de Go avec contrainte (7 pierres d'handicap).
 			\item Utilisés par les programmes \textbf{MOGO}, \textbf{CRAZY STONE}, \textbf{FUEGO}, ... qui sont aussi très efficace.
 			\item \textbf{AlphaGo} utilise aussi le MCTS pour sa recherche de coup (en l'adaptant à son programme).
 			
