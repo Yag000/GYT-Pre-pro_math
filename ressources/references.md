@@ -1,6 +1,6 @@
 # File for dumping references
 
-##
+## References
 
 <https://project.dke.maastrichtuniversity.nl/games/files/phd/Chaslot_thesis.pdf>
 <https://helios2.mi.parisdescartes.fr/~bouzy/publications/Chaslot-MCStrategiesComputerGo-BNAIC06.pdf>
