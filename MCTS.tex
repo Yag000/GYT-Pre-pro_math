@@ -2,10 +2,10 @@
 	\begin{block}{}
 		\begin{itemize}
 			\item Le \textbf{MCTS} est un algorithme de recherche arborescente utilisé pour résoudre des problèmes afin de prendre une décision (un déplacement dans un jeu par exemple).
-			\item Il n'utilise pas de fonction d'évaluation heuristique comparé à \textbf{$\alpha$$\beta$} par exemple, et parcours les possibilités aléatoirement, en utilisant les donnés obtenus précédemment.
+			\item Il n'utilise pas de fonction d'évaluation heuristique comparé à \textbf{$\alpha$$\beta$} par exemple, et parcours les possibilités aléatoirement, en utilisant les données obtenues précédemment.
 			\item Il utilise les méthodes de \textbf{Monte Carlo} pour améliorer son efficacité.
 			\item Il possède des variantes, dépendant de leur utilisation, comme celles de \textbf{Coulom}, \textbf{Kocsis} et \textbf{Szepesvari}.
-			\item Applicable si toutes les règles de l'application sont connus et si la longueur d'une partie et les gains ont une limite.	
+			\item Applicable si toutes les règles de l'application sont connues et si la longueur d'une partie et les gains ont une limite.	
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -17,8 +17,8 @@
 			\item Un noeud représente un état du jeu.
 			\item Chaque noeud possède deux informations :
 			\item\begin{itemize}
-				\item - La \textbf{valeur} de sa position (dans un jeu, représenté souvent par la moyenne des résultats pour un jeu sur les noeuds visités).
-				\item - Le \textbf{nombre de visite} de ce noeud dans la simulation.
+				\item - La \textbf{valeur} de sa position.
+				\item - Le \textbf{nombre de visites} de ce noeud dans la simulation.
 			\end{itemize}
 			\item Chaque feuille de cet arbre représente soit un noeud dont les enfants n'ont pas encore été explorés, soit un état final de celui-ci.		
 		\end{itemize}
@@ -28,7 +28,7 @@
 \begin{frame}
 	\begin{block}{Exemple d'arbre MCTS}
 		\begin{center}
-			\includegraphics[width=7cm]{ressources/tree.png}
+			\includegraphics[width=7cm]{ressources/MCTS/tree.png}
 		\end{center}
 	\end{block}
 \end{frame}
@@ -41,29 +41,29 @@
 	    		\item 2. Expansion
 	    		\item 3. Simulation
 	    		\item 4. Rétropropagation
-	    		\item Répété jusqu'à un certain temps jusqu'à la prise de décision.
+	    		\item Répété jusqu'à la prise de décision.
 	    	\end{itemize}
 		\begin{center}
-			\includegraphics[width=8cm]{ressources/MCTSEtapes}
+			\includegraphics[width=8cm]{ressources/MCTS/MCTSEtapes}
 		\end{center}
 	\end{block}
 \end{frame}
 
 \begin{frame}{Monte Carlo Tree Search(MCTS)}{Sélection}
-\begin{block}{Fonctionnement Sélection}
-	\begin{columns}
-		\begin{column}{7cm}
-			\begin{itemize}
-				\item - On commençant à partir de la racine. \item - On applique récursivement une \textbf{stratégie} de sélection pour trouver une feuille de l'arbre à étendre (un chemin qui n'a donc pas encore été exploré).
-				\item La stratégie doit pour optimiser les résultats, faire un consensus entre exploitation et exploration.
-				\item Il existe pour cela plusieurs stratégies comme \textbf{OMC}, \textbf{UCT}, \textbf{PBBM}, ...
-			\end{itemize}
-		\end{column}
-		\begin{column}{4cm}
-			\includegraphics[width=3cm]{ressources/Selection.png}
-		\end{column}
-	\end{columns}
-\end{block}
+	\begin{block}{Fonctionnement Sélection}
+		\begin{columns}
+			\begin{column}{7cm}
+				\begin{itemize}
+					\item - On commençant à partir de la racine. \item - On applique récursivement une \textbf{stratégie} de sélection pour trouver une feuille de l'arbre à étendre (un chemin qui n'a donc pas encore été exploré).
+					\item La stratégie doit, pour optimiser les résultats, faire un consensus entre exploitation et exploration.
+					\item Il existe pour cela plusieurs stratégies comme \textbf{OMC}, \textbf{UCT}, \textbf{PBBM}, ...
+				\end{itemize}
+			\end{column}
+			\begin{column}{4cm}
+				\includegraphics[width=3cm]{ressources/MCTS/Selection.png}
+			\end{column}
+		\end{columns}
+	\end{block}
 \end{frame}
 
 \begin{frame}{Monte Carlo Tree Search(MCTS)}{Stratégie Sélection}
@@ -101,9 +101,9 @@
 	\begin{block}{Stratégie UCT (Upper Confidence bounds applied to Trees)}
 		\begin{itemize}
 			\item La stratégie UCT sélectionne un noeud $k$ fils du noeud $p$ qui satisfait la formule suivante :
-			\item $k \in argmax_{i\in I}(v_{i} + C \times \sqrt{\frac{\ln n_{p}}{n_{i}}})$
+			$$k \in argmax_{i\in I}(v_{i} + C \times \sqrt{\frac{\ln n_{p}}{n_{i}}})$$
 			\item $I$ un set de noeuds atteignable par le noeud $p$.
-			\item $v_{i}$ la valeur du noeud i
+			\item $v_{i}$ la valeur du noeud $i$
 			\item $n_{p}$ et $n_{p}$ le nombre de fois que les noeuds $p$ et $i$ on été visités.
 			\item $C$ une constante.
 			\item Facile à implémenter et beaucoup utilisée.
@@ -116,10 +116,10 @@
 		\begin{itemize}
 			\item Variante de la stratégie UCT
 			\item Cette sélectionne un noeud $k$ fils du noeud $p$ qui satisfait la formule suivante :
-			\item $k \in argmax_{i\in I}(v_{i} + C \times \sqrt{\frac{\ln n_{p}}{n_{i}}\times \min(\frac{1}{4}, V_{i}(n_{i}))})$
+			$$k \in argmax_{i\in I}(v_{i} + C \times \sqrt{\frac{\ln n_{p}}{n_{i}}\times \min(\frac{1}{4}, V_{i}(n_{i}))})$$
 			\item avec $V_{i}$ une estimation de la borne supérieur de la variance de $v_{i}$ avec comme formule :
-			\item $V_{i}(n_{i}) = (\frac{1}{n_{i}}\sum_{t=1}^{n_{i}}R_{i,t,j}^2 - v_{i}^2 + \sqrt{\frac{2\ln n_{p}}{n_{i}}})$
-			\item $R_{i,t,k}$ la t-ième récompense obtenu au noeud $i$ pour le joueur $j$
+			$$V_{i}(n_{i}) = (\frac{1}{n_{i}}\sum_{t=1}^{n_{i}}R_{i,t,j}^2 - v_{i}^2 + \sqrt{\frac{2\ln n_{p}}{n_{i}}})$$
+			\item $R_{i,t,k}$ la $t$-ième récompense obtenu au noeud $i$ pour le joueur $j$
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -136,7 +136,7 @@
 				\end{itemize}
 			\end{column}
 			\begin{column}{4cm}
-				\includegraphics[width=3cm]{ressources/Expansion.png}
+				\includegraphics[width=3cm]{ressources/MCTS/Expansion.png}
 			\end{column}
 		\end{columns}
 	\end{block}
@@ -156,14 +156,14 @@
 		\begin{columns}
 			\begin{column}{7cm}
 				\begin{itemize}
-					\item - Réalise une \textbf{simulation} d'une partie aléatoirement (ou partiellement) à partir du noeud qui étendu
-					\item - Continue jusqu'à atteindre un état \textbf{final}, afin d'obtenir un résultat.
-					\item Il existe des stratégies de simulation, difficile à définir car on doit garder un bon compromis entre recherche et exploitation.
-					\item Ces stratégies peuvent utilises des connaissances du jeu (patterns, considérations, ...)
+					\item - Réalise une \textbf{simulation} d'une partie aléatoirement (ou partiellement) à partir du noeud étendu
+					\item - Continue de parcourir des états de jeux jusqu'à atteindre un état \textbf{final}, afin d'obtenir un résultat.
+					\item Il existe des stratégies de simulation, difficiles à définir car on doit garder un bon compromis entre recherche et exploitation.
+					\item Ces stratégies peuvent utiliser des connaissances du jeu (patterns, considérations, ...)
 				\end{itemize}
 			\end{column}
 			\begin{column}{4cm}
-				\includegraphics[width=3cm]{ressources/Simulation.png}
+				\includegraphics[width=3cm]{ressources/MCTS/Simulation.png}
 			\end{column}
 		\end{columns}
 	\end{block}
@@ -182,8 +182,8 @@
 				\end{itemize}
 			\end{column}
 			\begin{column}{3cm}
-				\includegraphics[width=2cm]{ressources/3x3GridGo.png}
-				\includegraphics[width=2cm]{ressources/3x3GridGo2.png}
+				\includegraphics[width=2cm]{ressources/MCTS/3x3GridGo.png}
+				\includegraphics[width=2cm]{ressources/MCTS/3x3GridGo2.png}
 			\end{column}
 		\end{columns}
 	\end{block}\end{frame}
@@ -207,7 +207,7 @@
 				\end{itemize}
 			\end{column}
 			\begin{column}{4cm}
-				\includegraphics[width=3cm]{ressources/Backpropagation.png}
+				\includegraphics[width=3cm]{ressources/MCTS/Backpropagation.png}
 			\end{column}
 		\end{columns}
 	\end{block}
@@ -216,7 +216,7 @@
 \begin{frame}{Monte Carlo Tree Search(MCTS)}{Stratégie Rétropropagation}
 	\begin{block}{Exemple de stratégies}
 		\begin{itemize}
-			\item Il existe aussi plusieurs stratégie de rétropropagation :
+			\item Il existe aussi plusieurs stratégies de rétropropagation :
 			\item \textbf{Moyenne} : Prend la moyenne des résultats : $v_{i} = \frac{\sum_{i}^{}R_{i}}{n_{i}}$ avec $v_{i}$ la valeur du noeud et $n_i$ le nombre de fois qu'il a été visité.
 			\item \textbf{Max} : Prend le max des résultats des enfants (pas efficace)
 			\item \textbf{Moyenne informée} : Attribue de plus grande valeur aux meilleurs résultats afin d'avoir le meilleurs résultats plus rapidement.
