@@ -30,17 +30,17 @@
     \begin{columns}[t]
         \begin{column}{.3\textwidth}
             \begin{block}{Policy network}
-                Réseau neuronal qui renvoie une distribution de probabilité sur le coups possibles.
+                Réseau neuronal qui renvoie une \textbf{distribution de probabilité} sur le coups possibles.
             \end{block}
         \end{column}
         \begin{column}{.3\textwidth}
             \begin{block}{Value Network}
-                Réseau neuronal chargé d'estimer la valeur d'une position, c'est-à-dire, les possibilités de gagner à partir de cette position.
+                Réseau neuronal chargé d'estimer la \textbf{valeur} d'une position, c'est-à-dire, les possibilités de gagner à partir de cette position.
             \end{block}
         \end{column}
         \begin{column}{.3\textwidth}
             \begin{block}{Fast Rollout policy}
-                Politique plus simple que les autres qui permet une simulation rapide du reste de la partie.
+                Politique plus simple que les autres qui permet une \textbf{simulation rapide} du reste de la partie.
             \end{block}
         \end{column}
     \end{columns}
@@ -52,12 +52,12 @@
         \begin{columns}[t]
             \begin{column}{.4\textwidth}
                 \begin{block}{Avec un modèle}
-                    Entrainement d'un réseaux supervisé (SL).
+                    Entrainement d'un réseaux \textbf{supervisé} (SL).
                 \end{block}
             \end{column}
             \begin{column}{.4\textwidth}
                 \begin{block}{Self-play}
-                    Apprentisage par renforcement à partir du SL en jouant des parties contre soi-même.
+                    Apprentisage par renforcement à partir du SL en jouant des parties \textbf{contre soi-même}.
                 \end{block}
             \end{column}
         \end{columns}
@@ -75,7 +75,7 @@
         \vspace{1cm}
         \begin{block}{Solution}
             Réseau neuronal de type convolutionnel avec 13 couches.
-            Entraînement initial supervisé à partir de parties jouées par des professionnels (30 million de positions différentes).
+            Entraînement initial \textbf{supervisé} à partir de parties jouées par des professionnels (30 million de positions différentes).
         \end{block}
     \end{center}
 \end{frame}
@@ -83,7 +83,7 @@
 \begin{frame}{AlphaGo}{Apprentissage avec un modèle (SL)}
     \begin{block}{Resultat}
         Politique $p_\sigma$, avec $\sigma$ les paramètres (les poids) du réseau.
-        Le temps d'évaluation d'une position est de l'ordre de 3 ms avec une précision de 57.0\%.
+        Le temps d'évaluation d'une position est de l'ordre de \textbf{3 ms} avec une précision de \textbf{57.0\%}.
     \end{block}
     \begin{center}
         \includegraphics[scale=0.4]{ressources/AlphaGo/Policy_Network}
@@ -93,35 +93,35 @@
 \begin{frame}{AlphaGo}{Self-play}
     \begin{block}{Objectif}
         \begin{center}
-            Trouver une politique meilleure que $p_\sigma$.
+            Trouver une politique \textbf{meilleure} que $p_\sigma$.
         \end{center}
     \end{block}
 
     \begin{block}{Solution}
         \begin{itemize}
-            \item Entraînement par renforcement en jouant des parties contre soi-même.
+            \item Entraînement par renforcement en jouant des parties contre \textbf{soi-même}.
             \item Système de recompense simple : +1 si victoire et -1 si défaite.
             \item Structure égale à celle du SL, avec une politique $p_\rho$, avec des poids initiales égaux à $\sigma$.
             \item Parties entre la version actuelle de l'agent et une version antérieure aléatoire.
-            \item Taux de réussite contre le SL : 80\%.
+            \item Taux de réussite contre le SL : \textbf{80\%}.
         \end{itemize}
     \end{block}
 \end{frame}
 
 
 \begin{frame}{AlphaGo}{Value network}
-    La \textbf{value network} nous permet d'estimer la valeur d'une position, c'est-à-dire, les possibilités de gagner à partir de cette position.
+    La \textbf{value network} nous permet d'estimer la \textbf{valeur} d'une position, c'est-à-dire, les possibilités de gagner à partir de cette position.
     \begin{block}{Modèle théorique}
         On définit $v^p$ comme la fonction qui prédit le résultat de la partie en partant de la position $s$ suivant la politique $p$. On a donc: $$v^p(s) = \mathbb{E}[z_t|s_t=s, a_{t,\dots,T}\sim p]$$
         L'idéal est de trouver $v^*$, la fonction de valeur optimale avec un jeu parfait, mais c'est impossible.
-        On décide d'utiliser la meilleur politique qu'on connaît: $p_\rho$, ainsi on peut approximer la valeur de $v^*$. $$v_\theta(s) \approx v^{p_\rho}(s) \approx v^*(s)$$
+        On décide d'utiliser la meilleur politique qu'on connaît: $p_\rho$, ainsi on peut \textbf{approximer} la valeur de $v^*$. $$v_\theta(s) \approx v^{p_\rho}(s) \approx v^*(s)$$
     \end{block}
 \end{frame}
 
 \begin{frame}{AlphaGo}{Value network}
     \begin{itemize}
         \item Pour obtenir $v_\theta(s)$, on utilise un réseau de neurones profond.
-        \item Sa structure est la même que celle du RL mais avec une seule sortie et il est entraîné sur la RL.
+        \item Sa structure est la même que celle du RL mais avec \textbf{une seule sortie} et il est entraîné sur la RL.
     \end{itemize}
     \begin{center}
         \includegraphics[width=5cm]{ressources/AlphaGo/RL_and_VN}
@@ -131,14 +131,14 @@
 \begin{frame}{AlphaGo}{Fast rollout policy}
     \begin{block}{Objectif}
         \begin{center}
-            Trouver une politique rapide qui permet de simuler le reste de la partie.
+            Trouver une politique \textbf{rapide} qui permet de \textbf{simuler} le reste de la partie.
         \end{center}
     \end{block}
     \begin{block}{Solution}
         \begin{itemize}
             \item
             \item Entraîné avec le même modèle que le SL, mais avec une politique $p_\pi$ et une architecture beaucoup plus simple.
-            \item Elle obtient des résultats moins précis mais avec une vitesse de calcul bien supérieure: précision de 24.2\% et temps d'évaluation de 2 $\mu s$ .
+            \item Elle obtient des résultats moins précis mais avec une vitesse de calcul bien supérieure: précision de \textbf{24.2\%} et temps d'évaluation de \textbf{2} $\boldsymbol{\mu s}$ .
         \end{itemize}
     \end{block}
 \end{frame}
