@@ -11,8 +11,7 @@
             \item En mars 2016 \textbf{AlphaGo} a battu Lee Sedol, l'un des meilleurs joueurs de Go
         \end{itemize}
     \end{block}
-    \begin{exampleblock}{}
-        \textbf{Technologies utilisées:}
+    \begin{exampleblock}{\textbf{Technologies utilisées:}}
         \begin{itemize}
             \item Apprentissage par renforcement
             \item Réseaux de neurones profonds
@@ -35,8 +34,7 @@
         \end{column}
         \begin{column}{.3\textwidth}
             \begin{block}{Value Network}
-                Réseau neuronal chargé d'estimer la \textbf{valeur} d'une position, c'est-à-dire, les possibilités de gagner à partir de cette position.
-            \end{block}
+                Réseau neuronal chargé d'estimer la \textbf{valeur} d'une position.            \end{block}
         \end{column}
         \begin{column}{.3\textwidth}
             \begin{block}{Fast Rollout policy}
@@ -74,7 +72,7 @@
         \end{block}
         \vspace{1cm}
         \begin{block}{Solution}
-            Réseau neuronal de type convolutionnel avec 13 couches.
+            Réseau neuronal convolutionnel avec 13 couches.
             Entraînement initial \textbf{supervisé} à partir de parties jouées par des professionnels (30 million de positions différentes).
         \end{block}
     \end{center}
@@ -83,7 +81,7 @@
 \begin{frame}{AlphaGo}{Apprentissage avec un modèle (SL)}
     \begin{block}{Resultat}
         Politique $p_\sigma$, avec $\sigma$ les paramètres (les poids) du réseau.
-        Le temps d'évaluation d'une position est de l'ordre de \textbf{3 ms} avec une précision de \textbf{57.0\%}.
+        Le temps d'évaluatio de l'ordre de \textbf{3 ms} avec une précision de \textbf{57.0\%}.
     \end{block}
     \begin{center}
         \includegraphics[scale=0.4]{ressources/AlphaGo/Policy_Network}
@@ -101,8 +99,8 @@
         \begin{itemize}
             \item Entraînement par renforcement en jouant des parties contre \textbf{soi-même}.
             \item Système de recompense simple : +1 si victoire et -1 si défaite.
-            \item Structure égale à celle du SL, avec une politique $p_\rho$, avec des poids initiales égaux à $\sigma$.
-            \item Parties entre la version actuelle de l'agent et une version antérieure aléatoire.
+            \item Structure \textbf{égale à celle du SL}, avec une politique $p_\rho$, avec des poids initiales égaux à $\sigma$.
+            \item Parties entre la version actuelle de l'agent et une \textbf{version antérieure aléatoire}.
             \item Taux de réussite contre le SL : \textbf{80\%}.
         \end{itemize}
     \end{block}
@@ -110,35 +108,40 @@
 
 
 \begin{frame}{AlphaGo}{Value network}
-    La \textbf{value network} nous permet d'estimer la \textbf{valeur} d'une position, c'est-à-dire, les possibilités de gagner à partir de cette position.
+    La \textbf{value network} nous permet d'estimer la \textbf{valeur} d'une position.
     \begin{block}{Modèle théorique}
-        On définit $v^p$ comme la fonction qui prédit le résultat de la partie en partant de la position $s$ suivant la politique $p$. On a donc: $$v^p(s) = \mathbb{E}[z_t|s_t=s, a_{t,\dots,T}\sim p]$$
-        L'idéal est de trouver $v^*$, la fonction de valeur optimale avec un jeu parfait, mais c'est impossible.
+        On définit $v^p$ comme la fonction qui prédit le résultat de la partie en partant de la position $s$ suivant la politique $p$.$$v^p(s) = \mathbb{E}[z_t|s_t=s, a_{t,\dots,T}\sim p]$$
+        L'idéal est de trouver $v^*$, la fonction de valeur optimale, mais c'est impossible.
         On décide d'utiliser la meilleur politique qu'on connaît: $p_\rho$, ainsi on peut \textbf{approximer} la valeur de $v^*$. $$v_\theta(s) \approx v^{p_\rho}(s) \approx v^*(s)$$
     \end{block}
 \end{frame}
 
 \begin{frame}{AlphaGo}{Value network}
-    \begin{itemize}
-        \item Pour obtenir $v_\theta(s)$, on utilise un réseau de neurones profond.
-        \item Sa structure est la même que celle du RL mais avec \textbf{une seule sortie} et il est entraîné sur la RL.
-    \end{itemize}
+    \begin{block}{Solution}
+        \begin{itemize}
+            \item Utiliser un réseau de neurones profond.
+            \item Sa structure est la même que celle du RL mais avec \textbf{une seule sortie} et il est entraîné sur la RL.
+        \end{itemize}
+    \end{block}
     \begin{center}
-        \includegraphics[width=5cm]{ressources/AlphaGo/RL_and_VN}
+        \includegraphics[width=5cm, height=5.2cm]{ressources/AlphaGo/RL_and_VN}
     \end{center}
 \end{frame}
 
 \begin{frame}{AlphaGo}{Fast rollout policy}
     \begin{block}{Objectif}
         \begin{center}
-            Trouver une politique \textbf{rapide} qui permet de \textbf{simuler} le reste de la partie.
+            Politique \textbf{rapide} qui permet de \textbf{simuler} le reste de la partie.
         \end{center}
     \end{block}
     \begin{block}{Solution}
         \begin{itemize}
             \item
-            \item Entraîné avec le même modèle que le SL, mais avec une politique $p_\pi$ et une architecture beaucoup plus simple.
-            \item Elle obtient des résultats moins précis mais avec une vitesse de calcul bien supérieure: précision de \textbf{24.2\%} et temps d'évaluation de \textbf{2} $\boldsymbol{\mu s}$ .
+            \item Entraîné avec le même modèle que le SL.
+            \item Architecture beaucoup plus simple.
+            \item Politique $p_\pi$
+            \item Précision de \textbf{24.2\%}.
+            \item Temps d'évaluation de \textbf{2} $\boldsymbol{\mu s}$.
         \end{itemize}
     \end{block}
 \end{frame}
@@ -146,18 +149,50 @@
 
 \begin{frame}{AlphaGo}{MCTS}
     \begin{center}
-        \includegraphics[width=10.5cm]{ressources/AlphaGo/MCTS_AlphaGo}
-        \begin{block}{}
+        \includegraphics[width=10.5cm, height=3.8cm]{ressources/AlphaGo/MCTS_AlphaGo}
+        \begin{block}{ Fonctions du MCTS }
             \begin{columns}[t]
-                \begin{column}{0.5\textwidth}
-                    $u(s,a) \propto \frac{P(s,a)}{1+N(s,a)}$
-                    $Q(s,a) = \frac{1}{N(s,a)}\sum\limits_{i=1}^{n} 1_{s,a,i} V(s_L)$
+                \begin{column}{0.45\textwidth}
+                    Calcul de la valeur de l'action $a$ dans la position $s$.
+                    $$Q(s,a) = \frac{1}{N(s,a)}\sum\limits_{i=1}^{n} 1_{s,a,i} V(s_L)$$
+
                 \end{column}
-                \begin{column}{0.4\textwidth}
-                    $N (s,a) = \sum\limits_{i=1}^{n} 1_{s,a,i} $
-                    $V(s_L)=(1-\lambda)v_\theta(s_L) + \lambda z_L$
+                \begin{column}{0.45\textwidth}
+                    Fonction bonus inversement proportionnelle aux visites du neoud.
+                    $$u(s,a) \propto \frac{P(s,a)}{1+N(s,a)}$$
                 \end{column}
             \end{columns}
+        \end{block}
+    \end{center}
+\end{frame}
+
+\begin{frame}{AlphaGo}{MCTS}
+    \begin{center}
+        \includegraphics[width=10.5cm, height=3.8cm]{ressources/AlphaGo/MCTS_AlphaGo}
+        \begin{block}{ Fonctions du MCTS }
+            \begin{columns}[t]
+                \begin{column}{0.45\textwidth}
+                    Calcul de la valeur de d'action $a$ dans la position $s$, selon la politique $p_\sigma$:
+                    $$P(s,a) = p_\sigma(a|s)$$
+
+                \end{column}
+                \begin{column}{0.45\textwidth}
+                    Calcul du nombre de visites du noeud:
+                    $$N (s,a) = \sum\limits_{i=1}^{n} 1_{s,a,i} $$
+                \end{column}
+
+            \end{columns}
+        \end{block}
+
+    \end{center}
+\end{frame}
+
+\begin{frame}{AlphaGo}{MCTS}
+    \begin{center}
+        \includegraphics[width=10.5cm, height=3.8cm]{ressources/AlphaGo/MCTS_AlphaGo}
+        \begin{block}{ Fonctions du MCTS }
+            Valeur de la position $s_L$:
+            $$V(s_L)=(1-\lambda)v_\theta(s_L) + \lambda z_L \mbox{, avec } \lambda \in [0,1]$$
         \end{block}
     \end{center}
 \end{frame}
