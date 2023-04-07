@@ -5,7 +5,7 @@
 			\item Il n'utilise pas de fonction d'évaluation heuristique comparé à \textbf{$\alpha$$\beta$} par exemple, et parcours les possibilités aléatoirement, en utilisant les données obtenues précédemment.
 			\item Il utilise les méthodes de \textbf{Monte Carlo} pour améliorer son efficacité.
 			\item Il possède des variantes, dépendant de leur utilisation, comme celles de \textbf{Coulom}, \textbf{Kocsis} et \textbf{Szepesvari}.
-			\item Applicable si toutes les règles de l'application sont connues et si la longueur d'une partie et les gains ont une limite.	
+			\item Applicable si toutes les règles de l'application sont connues et si la longueur d'une partie et les gains ont une limite.
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -17,10 +17,10 @@
 			\item Un noeud représente un état du jeu.
 			\item Chaque noeud possède deux informations :
 			\item\begin{itemize}
-				\item - La \textbf{valeur} de sa position.
-				\item - Le \textbf{nombre de visites} de ce noeud dans la simulation.
-			\end{itemize}
-			\item Chaque feuille de cet arbre représente soit un noeud dont les enfants n'ont pas encore été explorés, soit un état final de celui-ci.		
+				      \item - La \textbf{valeur} de sa position.
+				      \item - Le \textbf{nombre de visites} de ce noeud dans la simulation.
+			      \end{itemize}
+			\item Chaque feuille de cet arbre représente soit un noeud dont les enfants n'ont pas encore été explorés, soit un état final de celui-ci.
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -35,14 +35,14 @@
 
 
 \begin{frame}{Monte Carlo Tree Search(MCTS)}{Structure}
-    \begin{block}{Plusieurs étapes}
-	    	\begin{itemize}
-	    		\item 1. Sélection
-	    		\item 2. Expansion
-	    		\item 3. Simulation
-	    		\item 4. Rétropropagation
-	    		\item Répété jusqu'à la prise de décision.
-	    	\end{itemize}
+	\begin{block}{Plusieurs étapes}
+		\begin{itemize}
+			\item 1. Sélection
+			\item 2. Expansion
+			\item 3. Simulation
+			\item 4. Rétropropagation
+			\item Répété jusqu'à la prise de décision.
+		\end{itemize}
 		\begin{center}
 			\includegraphics[width=8cm]{ressources/MCTS/MCTSEtapes}
 		\end{center}
@@ -101,7 +101,7 @@
 	\begin{block}{Stratégie UCT (Upper Confidence bounds applied to Trees)}
 		\begin{itemize}
 			\item La stratégie UCT sélectionne un noeud $k$ fils du noeud $p$ qui satisfait la formule suivante :
-			$$k \in argmax_{i\in I}(v_{i} + C \times \sqrt{\frac{\ln n_{p}}{n_{i}}})$$
+			      $$k \in argmax_{i\in I}(v_{i} + C \times \sqrt{\frac{\ln n_{p}}{n_{i}}})$$
 			\item $I$ un set de noeuds atteignable par le noeud $p$.
 			\item $v_{i}$ la valeur du noeud $i$
 			\item $n_{p}$ et $n_{p}$ le nombre de fois que les noeuds $p$ et $i$ on été visités.
@@ -116,9 +116,9 @@
 		\begin{itemize}
 			\item Variante de la stratégie UCT
 			\item Cette sélectionne un noeud $k$ fils du noeud $p$ qui satisfait la formule suivante :
-			$$k \in argmax_{i\in I}(v_{i} + C \times \sqrt{\frac{\ln n_{p}}{n_{i}}\times \min(\frac{1}{4}, V_{i}(n_{i}))})$$
+			      $$k \in argmax_{i\in I}(v_{i} + C \times \sqrt{\frac{\ln n_{p}}{n_{i}}\times \min(\frac{1}{4}, V_{i}(n_{i}))})$$
 			\item avec $V_{i}$ une estimation de la borne supérieur de la variance de $v_{i}$ avec comme formule :
-			$$V_{i}(n_{i}) = (\frac{1}{n_{i}}\sum_{t=1}^{n_{i}}R_{i,t,j}^2 - v_{i}^2 + \sqrt{\frac{2\ln n_{p}}{n_{i}}})$$
+			      $$V_{i}(n_{i}) = (\frac{1}{n_{i}}\sum_{t=1}^{n_{i}}R_{i,t,j}^2 - v_{i}^2 + \sqrt{\frac{2\ln n_{p}}{n_{i}}})$$
 			\item $R_{i,t,k}$ la $t$-ième récompense obtenu au noeud $i$ pour le joueur $j$
 		\end{itemize}
 	\end{block}
@@ -144,10 +144,10 @@
 
 \begin{frame}{Monte Carlo Tree Search(MCTS)}{Stratégie Expansion}
 	\begin{block}{Exemple de statégies d'expansion}
-			\begin{itemize}
-				\item - Garder seulement un noeud par jeu simulé. Ce noeud correspond à la première position qui n'était pas déjà stockée lors d'un parcours.
-				\item - Continuer à stocker les enfants d'un noeud jusqu'à un nombre limité de simulations (nécessite une quantité conséquente de mémoire)
-			\end{itemize}
+		\begin{itemize}
+			\item - Garder seulement un noeud par jeu simulé. Ce noeud correspond à la première position qui n'était pas déjà stockée lors d'un parcours.
+			\item - Continuer à stocker les enfants d'un noeud jusqu'à un nombre limité de simulations (nécessite une quantité conséquente de mémoire)
+		\end{itemize}
 	\end{block}
 \end{frame}
 
@@ -175,8 +175,8 @@
 			\begin{column}{8cm}
 				\begin{itemize}
 					\item Cette stratégie est adapté au jeu de GO, et consiste à :
-					\item - \textbf{Sélection} de chaque coup à proximité du dernier coup joué $c_{0}$ avec $E$ l'ensemble des coups adjacents. 
-					\item - \textbf{Choix} du coup à jouer dans $E$, en cherchant des motifs de jeu de taille 3x3 à une distance 1 de Manhattan avec $c_{0}$. 
+					\item - \textbf{Sélection} de chaque coup à proximité du dernier coup joué $c_{0}$ avec $E$ l'ensemble des coups adjacents.
+					\item - \textbf{Choix} du coup à jouer dans $E$, en cherchant des motifs de jeu de taille 3x3 à une distance 1 de Manhattan avec $c_{0}$.
 					\item - Si plusieurs motifs correspondent : choix aléatoire du motif parmi eux en jouant au milieu de celui-ci.
 					\item - Si aucun est reconnu, choix aléatoire.
 				\end{itemize}
@@ -196,15 +196,15 @@
 				\begin{itemize}
 					\item - Utilise le résultat de la simulation pour \textbf{propager} l'information aux \textbf{parents} de ce noeud récursivement.
 					\item - Se propage jusqu'au noeud le plus haut afin de mettre les données de tout les noeuds  à jour.
-					\item - Change alors la valeur des noeud 
-					par une souhaité et garde en mémoire sa visite.
+					\item - Change alors la valeur des noeud
+					      par une souhaité et garde en mémoire sa visite.
 					\item  Pour intérpréter, on pose $R_{i}$ le résultat d'une partie (de GO par exemple) :
-					
-					- $R_{i} = +1$ si l'IA gagne
-					
-					- $R_{i} = -1$ si l'IA perd
-					
-					- $R_{i} = 0$ si égalité.
+
+					      - $R_{i} = +1$ si l'IA gagne
+
+					      - $R_{i} = -1$ si l'IA perd
+
+					      - $R_{i} = 0$ si égalité.
 				\end{itemize}
 			\end{column}
 			\begin{column}{4cm}
@@ -221,7 +221,7 @@
 			\item \textbf{Moyenne} : Prend la moyenne des résultats : $v_{i} = \frac{\sum_{i}^{}R_{i}}{n_{i}}$ avec $v_{i}$ la valeur du noeud et $n_i$ le nombre de fois qu'il a été visité.
 			\item \textbf{Max} : Prend le max des résultats des enfants (pas efficace)
 			\item \textbf{Moyenne informée} : Attribue de plus grande valeur aux meilleurs résultats afin d'avoir le meilleurs résultats plus rapidement.
-			On a : $v_{i} = \frac{\sum_{j}^{}(v_{j}\times n_{j}\times U_{j})}{\sum_{j}^{}(n_{j}\times U_{j})}$ avec $U_{j}$ la fonction d'urgence utilisé pour la stratégie de sélection OMC.
+			      On a : $v_{i} = \frac{\sum_{j}^{}(v_{j}\times n_{j}\times U_{j})}{\sum_{j}^{}(n_{j}\times U_{j})}$ avec $U_{j}$ la fonction d'urgence utilisé pour la stratégie de sélection OMC.
 			\item \
 			\item Mais la majorité des programmes utilise la stratégie \textbf{Moyenne} car elle donne de meilleurs résultats.
 		\end{itemize}
@@ -247,7 +247,7 @@
 			\item Le programme MCTS \textbf{Mogo Titan} a permis pour la première fois de battre un joueur professionnel de Go avec contrainte (7 pierres d'handicap).
 			\item Utilisés par les programmes \textbf{MOGO}, \textbf{CRAZY STONE}, \textbf{FUEGO}, ... qui sont aussi très efficace.
 			\item \textbf{AlphaGo} utilise aussi le MCTS pour sa recherche de coup (en l'adaptant à son programme).
-			
+
 		\end{itemize}
 	\end{block}
 \end{frame}
