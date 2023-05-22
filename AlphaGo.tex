@@ -50,12 +50,12 @@
         \begin{columns}[t]
             \begin{column}{.4\textwidth}
                 \begin{block}{Avec un modèle}
-                    Entrainement d'un réseaux \textbf{supervisé} (SL).
+                    Entraînement d'un réseau \textbf{supervisé} (SL).
                 \end{block}
             \end{column}
             \begin{column}{.4\textwidth}
                 \begin{block}{Self-play}
-                    Apprentisage par renforcement à partir du SL en jouant des parties \textbf{contre soi-même}.
+                    Apprentissage par renforcement à partir du SL en jouant des parties \textbf{contre soi-même}.
                 \end{block}
             \end{column}
         \end{columns}
@@ -72,7 +72,7 @@
         \end{block}
         \vspace{1cm}
         \begin{block}{Solution}
-            Réseau neuronal convolutionnel avec 13 couches.
+            Réseau neuronal convolutif avec 13 couches.
             Entraînement initial \textbf{supervisé} à partir de parties jouées par des professionnels (30 million de positions différentes).
         \end{block}
     \end{center}
@@ -81,7 +81,7 @@
 \begin{frame}{AlphaGo}{Apprentissage avec un modèle (SL)}
     \begin{block}{Resultat}
         Politique $p_\sigma$, avec $\sigma$ les paramètres (les poids) du réseau.
-        Le temps d'évaluatio de l'ordre de \textbf{3 ms} avec une précision de \textbf{57.0\%}.
+        Temps d'évaluation de l'ordre de \textbf{3 ms} avec une précision de \textbf{57.0\%}.
     \end{block}
     \begin{center}
         \includegraphics[scale=0.4]{ressources/AlphaGo/Policy_Network}
@@ -139,7 +139,7 @@
             \item
             \item Entraîné avec le même modèle que le SL.
             \item Architecture beaucoup plus simple.
-            \item Politique $p_\pi$
+            \item Politique $p_\pi$.
             \item Précision de \textbf{24.2\%}.
             \item Temps d'évaluation de \textbf{2} $\boldsymbol{\mu s}$.
         \end{itemize}
@@ -158,7 +158,7 @@
 
                 \end{column}
                 \begin{column}{0.45\textwidth}
-                    Fonction bonus inversement proportionnelle aux visites du neoud.
+                    Fonction bonus inversement proportionnelle aux visites du noeud.
                     $$u(s,a) \propto \frac{P(s,a)}{1+N(s,a)}$$
                 \end{column}
             \end{columns}
@@ -172,7 +172,7 @@
         \begin{block}{ Fonctions du MCTS }
             \begin{columns}[t]
                 \begin{column}{0.45\textwidth}
-                    Calcul de la valeur de d'action $a$ dans la position $s$, selon la politique $p_\sigma$:
+                    Calcul de la valeur de l'action $a$ dans la position $s$, selon la politique $p_\sigma$:
                     $$P(s,a) = p_\sigma(a|s)$$
 
                 \end{column}

@@ -4,8 +4,15 @@
 \usetheme{Copenhagen}
 
 
-\usepackage{hyperref}
-
+\usepackage{hyperref}      
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=blue,
+	pdftitle={Overleaf Example},
+	pdfpagemode=FullScreen
+}  
 
 \usepackage{amsmath}
 \usepackage{amssymb} 
@@ -14,10 +21,8 @@
 \usepackage{float}
 \usepackage{wrapfig}
 
-
-\usepackage{lmodern}
 \usepackage{geometry}
-\usepackage{graphicx, enumitem}
+\usepackage{enumitem}
 
 \begin{document}
 
@@ -37,5 +42,8 @@
 \input{MCTS}
 \input{AlphaGo}
 \input{Conclusion}
+\input{References}
+
+
 
 \end{document}

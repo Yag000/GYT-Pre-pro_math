@@ -22,7 +22,7 @@
 				      \item - La \textbf{valeur} de sa position.
 				      \item - Le \textbf{nombre de visites} de ce noeud dans la simulation.
 			      \end{itemize}
-			\item Chaque feuille de cet arbre représente soit un \textbf{noeud}, soit un \textbf{état final} de celui-ci.
+			\item Chaque feuille de cet arbre représente soit un \textbf{noeud} dont les enfants n'ont pas encore été explorés, soit un \textbf{état final} de celui-ci.
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -255,7 +255,6 @@
 			\item \textbf{Mogo Titan}, un programme \textbf{MCTS}, a été le premier à avoir battu un joueur professionnel de Go avec contrainte (7 pierres d'handicap).
 			\item Il est utilisé par des programmes comme \textbf{MOGO}, \textbf{CRAZY STONE}, \textbf{FUEGO}, ...
 			\item \textbf{AlphaGo} utilise aussi le MCTS pour sa recherche de coup.
-
 		\end{itemize}
 	\end{block}
 \end{frame}
