@@ -58,7 +58,7 @@
 				\begin{itemize}
 					\item - \textbf{Débute} à partir de la racine.
 					\item \
-					\item - Application \textbf{récursive} d'une \textbf{stratégie} de sélection pour \textbf{trouver} une feuille de l'arbre à étendre. 
+					\item - Application \textbf{récursive} d'une \textbf{stratégie} de sélection pour \textbf{trouver} une feuille de l'arbre à étendre.
 				\end{itemize}
 			\end{column}
 			\begin{column}{4cm}
@@ -69,7 +69,7 @@
 	\begin{block}{Stratégies de la sélection}
 		\begin{itemize}
 			\item Il existe plusieurs stratégies de sélection (\textbf{OMC}, \textbf{UCT}, \textbf{PBBM}, ...).
-			
+
 			\item Les \textbf{stratégies} les plus optimales font un consensus entre \textbf{exploitation} et \textbf{exploration}.
 		\end{itemize}
 	\end{block}
@@ -123,9 +123,9 @@
 	\begin{block}{Stratégie UCB1-TUNED}
 		\begin{itemize}
 			\item Variante de la stratégie \textbf{UCT} qui sélectionne un noeud $k$ fils du noeud $p$ qui satisfait la formule suivante :
-			      $$k \in argmax_{i\in I}(v_{i} + C \times \sqrt{\frac{\ln n_{p}}{n_{i}}\times \min(\frac{1}{4}, V_{i}(n_{i}))})$$
+			      $$k \in argmax_{i\in I}\left(v_{i} + C \times \sqrt{\frac{\ln n_{p}}{n_{i}}\times \min(\frac{1}{4}, V_{i}(n_{i}))}\right)$$
 			\item avec $V_{i}$ une estimation de la borne supérieur de la variance de $v_{i}$ avec comme formule :
-			      $$V_{i}(n_{i}) = (\frac{1}{n_{i}}\sum_{t=1}^{n_{i}}R_{i,t,j}^2 - v_{i}^2 + \sqrt{\frac{2\ln n_{p}}{n_{i}}})$$
+			      $$V_{i}(n_{i}) = \frac{1}{n_{i}}\sum_{t=1}^{n_{i}}R_{i,t,j}^2 - v_{i}^2 + \sqrt{\frac{2\ln n_{p}}{n_{i}}}$$
 			\item $R_{i,t,k}$ la $t$-ième récompense obtenu au noeud $i$ pour le joueur $j$
 		\end{itemize}
 	\end{block}
@@ -174,7 +174,7 @@
 	\end{block}
 	\begin{block}{Stratégies de la simulation}
 		Il existe des \textbf{stratégies} de simulation qui sont difficile à définir.
-		
+
 		Ces \textbf{stratégies} peuvent utiliser des \textbf{connaissances acquises} du jeu (patterns, considérations, ...)
 	\end{block}
 \end{frame}
@@ -188,9 +188,9 @@
 					\item - \textbf{Sélectionner} chaque coup à proximité du dernier coup joué $c_{0}$ avec $E$ l'ensemble des coups adjacents.
 					\item - \textbf{Choisir} un coup à jouer dans $E$, en cherchant des motifs de jeu de taille 3x3 à une distance 1 de Manhattan avec $c_{0}$.
 					\item - Si plusieurs motifs correspondent :
-					\textbf{choix aléatoire parmi eux}.
+					      \textbf{choix aléatoire parmi eux}.
 					\item - Si aucun est reconnu :
-					\textbf{choix aléatoire parmi tous}.
+					      \textbf{choix aléatoire parmi tous}.
 				\end{itemize}
 			\end{column}
 			\begin{column}{3cm}
