@@ -1,8 +1,8 @@
 
-\begin{frame}{Markov Decision Process(MDP)}{Qu'est ce que la décision de Markov}
+\begin{frame}{Markov Decision Process(MDP)}{Qu'est ce que la décision de Markov ?}
 	\begin{center}
 		\begin{block}{Objectif}
-			Lorsque le modèle rencontre un problème, il existe plusieurs manières de le résoudre. On cherche la meilleure solution. Lorsque l'on répète cette action, on appelle cela un processus de décision de Markov. 
+			Lorsque le modèle rencontre un problème, il existe plusieurs manières de le résoudre. On cherche la meilleure solution. Lorsque l'on répète cette action, on appelle cela un processus de décision de Markov.
 		\end{block}
 		\begin{block}{Principe}
 			Un agent est capable de comprendre l’état dans lequel se trouve son environnement, et doit être en mesure de trouver une réponse afin de le modifier si besoin.
@@ -19,14 +19,14 @@
 \end{frame}
 \begin{frame}{Markov Decision Process(MDP)}{Qu'est ce qu'un état de Markov ?}
 	\begin{center}
-		
+
 		\begin{block}{Visualisation}
 			L'environnement est visualisable comme un automate probabilisé.
 		\end{block}
 		\begin{block}{Etat}
 			On peut noter la probabilité d'arriver dans un état comme cela:\\
 			Notons $E_{i}$ tous les états. Pour $i \in [1,d]$ avec $d$ l'indice du dernier état connu.\\
-			Alors un état $E_{d+1}$ est dit de Markov si et seulement si :\\ 
+			Alors un état $E_{d+1}$ est dit de Markov si et seulement si :\\
 			$$\mathbb{P}(E_{d+1} | E_{d}) = \mathbb{P}(E_{d+1} | E_{1}, ..., E_{d})$$\\
 		\end{block}
 		\begin{block}{Avantage}
@@ -36,9 +36,9 @@
 \end{frame}
 \begin{frame}{Markov Decision Process(MDP)}{Maximiser les récompenses}
 	\begin{center}
-		
+
 		\begin{block}{Fonction de récompense}
-            \centering
+			\centering
 			$R_t = \sum^{\infty}_{k=0}\gamma^{k}r_{t+k+1}$
 		\end{block}
 		\begin{block}{Explications}
@@ -54,7 +54,7 @@
 \end{frame}
 \begin{frame}{Markov Decision Process(MDP)}{Chaines de Markov}
 	\begin{center}
-		
+
 		\begin{center}{Un exemple d'automate}
 			\includegraphics[width=9.8cm]{ressources/MDP/automate probabilisé.png}
 		\end{center}
