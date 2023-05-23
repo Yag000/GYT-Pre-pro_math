@@ -125,7 +125,7 @@
 			\item Variante de la stratégie \textbf{UCT} qui sélectionne un noeud $k$ fils du noeud $p$ qui satisfait la formule suivante :
 			      $$k \in argmax_{i\in I}\left(v_{i} + C \times \sqrt{\frac{\ln n_{p}}{n_{i}}\times \min(\frac{1}{4}, V_{i}(n_{i}))}\right)$$
 			\item avec $V_{i}$ une estimation de la borne supérieur de la variance de $v_{i}$ avec comme formule :
-			      $$V_{i}(n_{i}) = \frac{1}{n_{i}}\sum_{t=1}^{n_{i}}R_{i,t,j}^2 - v_{i}^2 + \sqrt{\frac{2\ln n_{p}}{n_{i}}}$$
+			      $$V_{i}(n_{i}) = \left(\frac{1}{n_{i}}\sum_{t=1}^{n_{i}}R_{i,t,j}^2\right) - v_{i}^2 + \sqrt{\frac{2\ln n_{p}}{n_{i}}}$$
 			\item $R_{i,t,k}$ la $t$-ième récompense obtenu au noeud $i$ pour le joueur $j$
 		\end{itemize}
 	\end{block}
