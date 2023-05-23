@@ -79,7 +79,7 @@
 	\begin{block}{Stratégie OMC (Objective Monte-Carlo)}
 		\begin{itemize}
 			\item ${U_{i}}$ une fonction d'urgence d'un mouvement avec :
-			\item $U_{i} = erfc(\frac{v_{0} - v_{i}}{\sqrt{2}\sigma_{i}})$
+			\item $U_{i} = erfc \left(\frac{v_{0} - v_{i}}{\sqrt{2}\sigma_{i}}\right)$
 			\item $v_{0}$ la valeur du meilleur mouvement et $v_{j}$ la valeur du mouvement courant.
 			\item $\sigma_{j}$ la déviation de $v_{j}$
 			\item $erfc$ la fonction complémentaire d'erreur avec :
@@ -96,7 +96,7 @@
 		\begin{itemize}
 			\item Similitude avec la stratégie \textbf{OMC}.
 			\item $U_{i}$ aussi une fonction d'urgence d'un mouvement avec :
-			\item $U_{i} = \exp(-2.4\frac{v_{0} - v_{i}}{\sqrt{2(\sigma_{0}^2 + \sigma_{i}^2)}})) + \epsilon_{i}$
+			\item $U_{i} = \exp\left(-2.4\frac{v_{0} - v_{i}}{\sqrt{2(\sigma_{0}^2 + \sigma_{i}^2)}}\right) + \epsilon_{i}$
 			\item $v_{0}$ la valeur du meilleur mouvement et $v_{i}$ la valeur du mouvement courant.
 			\item $\sigma_{0}$ et $\sigma_{i}$ leur déviations.
 			\item $\epsilon_ {i}$ une constante assurant que la fonction d'urgence ne soit pas égale à 0 avec :
@@ -110,7 +110,7 @@
 	\begin{block}{Stratégie UCT (Upper Confidence bounds applied to Trees)}
 		\begin{itemize}
 			\item La stratégie \textbf{UCT} sélectionne un noeud $k$ fils du noeud $p$ qui satisfait la formule suivante :
-			      $$k \in argmax_{i\in I}(v_{i} + C \times \sqrt{\frac{\ln n_{p}}{n_{i}}})$$
+			      $$k \in argmax_{i\in I}\left(v_{i} + C \times \sqrt{\frac{\ln n_{p}}{n_{i}}}\right)$$
 			\item $I$ un set de noeuds atteignable par le noeud $p$.
 			\item $v_{i}$ la valeur du noeud $i$
 			\item $n_{p}$ et $n_{p}$ le nombre de fois que les noeuds $p$ et $i$ on été visités.
