@@ -153,12 +153,12 @@
         \begin{block}{ Fonctions du MCTS }
             \begin{columns}[t]
                 \begin{column}{0.45\textwidth}
-                    Calcul de la valeur de l'action $a$ dans la position $s$.
+                    Calcul de la valeur de l'action $a$ dans la position $s$:
                     $$Q(s,a) = \frac{1}{N(s,a)}\sum\limits_{i=1}^{n} 1_{s,a,i} V(s_L)$$
 
                 \end{column}
                 \begin{column}{0.45\textwidth}
-                    Fonction bonus inversement proportionnelle aux visites du noeud.
+                    Fonction bonus inversement proportionnelle aux visites du noeud:
                     $$u(s,a) \propto \frac{P(s,a)}{1+N(s,a)}$$
                 \end{column}
             \end{columns}
