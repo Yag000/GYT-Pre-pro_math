@@ -58,7 +58,7 @@
 				\begin{itemize}
 					\item - \textbf{Débute} à partir de la racine.
 					\item \
-					\item - Application \textbf{récursive} d'une \textbf{stratégie} de sélection pour \textbf{trouver} une feuille de l'arbre à étendre. 
+					\item - Application \textbf{récursive} d'une \textbf{stratégie} de sélection pour \textbf{trouver} une feuille de l'arbre à étendre.
 				\end{itemize}
 			\end{column}
 			\begin{column}{4cm}
@@ -69,7 +69,7 @@
 	\begin{block}{Stratégies de la sélection}
 		\begin{itemize}
 			\item Il existe plusieurs stratégies de sélection (\textbf{OMC}, \textbf{UCT}, \textbf{PBBM}, ...).
-			
+
 			\item Les \textbf{stratégies} les plus optimales font un consensus entre \textbf{exploitation} et \textbf{exploration}.
 		\end{itemize}
 	\end{block}
@@ -79,7 +79,7 @@
 	\begin{block}{Stratégie OMC (Objective Monte-Carlo)}
 		\begin{itemize}
 			\item ${U_{i}}$ une fonction d'urgence d'un mouvement avec :
-			\item $U_{i} = erfc(\frac{v_{0} - v_{i}}{\sqrt{2}\sigma_{i}})$
+			\item $U_{i} = erfc \left(\frac{v_{0} - v_{i}}{\sqrt{2}\sigma_{i}}\right)$
 			\item $v_{0}$ la valeur du meilleur mouvement et $v_{j}$ la valeur du mouvement courant.
 			\item $\sigma_{j}$ la déviation de $v_{j}$
 			\item $erfc$ la fonction complémentaire d'erreur avec :
@@ -96,7 +96,7 @@
 		\begin{itemize}
 			\item Similitude avec la stratégie \textbf{OMC}.
 			\item $U_{i}$ aussi une fonction d'urgence d'un mouvement avec :
-			\item $U_{i} = \exp(-2.4\frac{v_{0} - v_{i}}{\sqrt{2(\sigma_{0}^2 + \sigma_{i}^2)}})) + \epsilon_{i}$
+			\item $U_{i} = \exp\left(-2.4\frac{v_{0} - v_{i}}{\sqrt{2(\sigma_{0}^2 + \sigma_{i}^2)}}\right) + \epsilon_{i}$
 			\item $v_{0}$ la valeur du meilleur mouvement et $v_{i}$ la valeur du mouvement courant.
 			\item $\sigma_{0}$ et $\sigma_{i}$ leur déviations.
 			\item $\epsilon_ {i}$ une constante assurant que la fonction d'urgence ne soit pas égale à 0 avec :
@@ -110,7 +110,7 @@
 	\begin{block}{Stratégie UCT (Upper Confidence bounds applied to Trees)}
 		\begin{itemize}
 			\item La stratégie \textbf{UCT} sélectionne un noeud $k$ fils du noeud $p$ qui satisfait la formule suivante :
-			      $$k \in argmax_{i\in I}(v_{i} + C \times \sqrt{\frac{\ln n_{p}}{n_{i}}})$$
+			      $$k \in argmax_{i\in I}\left(v_{i} + C \times \sqrt{\frac{\ln n_{p}}{n_{i}}}\right)$$
 			\item $I$ un set de noeuds atteignable par le noeud $p$.
 			\item $v_{i}$ la valeur du noeud $i$
 			\item $n_{p}$ et $n_{p}$ le nombre de fois que les noeuds $p$ et $i$ on été visités.
@@ -123,9 +123,9 @@
 	\begin{block}{Stratégie UCB1-TUNED}
 		\begin{itemize}
 			\item Variante de la stratégie \textbf{UCT} qui sélectionne un noeud $k$ fils du noeud $p$ qui satisfait la formule suivante :
-			      $$k \in argmax_{i\in I}(v_{i} + C \times \sqrt{\frac{\ln n_{p}}{n_{i}}\times \min(\frac{1}{4}, V_{i}(n_{i}))})$$
+			      $$k \in argmax_{i\in I}\left(v_{i} + C \times \sqrt{\frac{\ln n_{p}}{n_{i}}\times \min(\frac{1}{4}, V_{i}(n_{i}))}\right)$$
 			\item avec $V_{i}$ une estimation de la borne supérieur de la variance de $v_{i}$ avec comme formule :
-			      $$V_{i}(n_{i}) = (\frac{1}{n_{i}}\sum_{t=1}^{n_{i}}R_{i,t,j}^2 - v_{i}^2 + \sqrt{\frac{2\ln n_{p}}{n_{i}}})$$
+			      $$V_{i}(n_{i}) = \left(\frac{1}{n_{i}}\sum_{t=1}^{n_{i}}R_{i,t,j}^2\right) - v_{i}^2 + \sqrt{\frac{2\ln n_{p}}{n_{i}}}$$
 			\item $R_{i,t,k}$ la $t$-ième récompense obtenu au noeud $i$ pour le joueur $j$
 		\end{itemize}
 	\end{block}
@@ -173,8 +173,8 @@
 		\end{columns}
 	\end{block}
 	\begin{block}{Stratégies de la simulation}
-		Il existe des \textbf{stratégies} de simulation qui sont difficile à définir.
-		
+		Il existe des \textbf{stratégies} de simulation qui sont difficiles à définir.
+
 		Ces \textbf{stratégies} peuvent utiliser des \textbf{connaissances acquises} du jeu (patterns, considérations, ...)
 	\end{block}
 \end{frame}
@@ -188,9 +188,9 @@
 					\item - \textbf{Sélectionner} chaque coup à proximité du dernier coup joué $c_{0}$ avec $E$ l'ensemble des coups adjacents.
 					\item - \textbf{Choisir} un coup à jouer dans $E$, en cherchant des motifs de jeu de taille 3x3 à une distance 1 de Manhattan avec $c_{0}$.
 					\item - Si plusieurs motifs correspondent :
-					\textbf{choix aléatoire parmi eux}.
+					      \textbf{choix aléatoire parmi eux}.
 					\item - Si aucun est reconnu :
-					\textbf{choix aléatoire parmi tous}.
+					      \textbf{choix aléatoire parmi tous}.
 				\end{itemize}
 			\end{column}
 			\begin{column}{3cm}
